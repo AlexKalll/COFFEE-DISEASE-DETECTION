@@ -15,11 +15,13 @@ from utils.config import (
     LAST_MODEL_PATH,
     RUNS_DIR,
     RUN_NAME,
+    DEVICE,
 )
 
 
 def train():
     settings.update({"runs_dir": str(RUNS_DIR)})
+    print(f"Using device: {DEVICE}")
 
     model = YOLO(PRETRAINED_MODEL)
 
@@ -28,6 +30,7 @@ def train():
         epochs=EPOCHS,
         imgsz=IMG_SIZE,
         batch=BATCH_SIZE,
+        device=DEVICE,
         project=RUNS_DIR,
         name=RUN_NAME,
         verbose=True,
