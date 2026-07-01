@@ -21,7 +21,6 @@ CUSTOM_CSS = """
 .footer { text-align: center; opacity: 0.7; font-size: 0.8rem; margin-top: 0.75rem; }
 """
 
-
 def load_model():
     global model
     if model is None:
