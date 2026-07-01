@@ -21,15 +21,15 @@ def predict(image_path, top_k=3):
         return None
 
     result = results[0]
-
     probs = result.probs
-    top_indices = probs.topk(top_k)
-    top_classes = [result.names[i] for i in top_indices[1]]
-    top_confidences = top_indices[0].cpu().numpy().tolist()
+
+    top_indices = probs.top5[:top_k]
+    top_confidences = probs.top5conf[:top_k].cpu().numpy()
+    top_classes = [result.names[i] for i in top_indices]
 
     predictions = []
     for cls, conf in zip(top_classes, top_confidences):
-        predictions.append({"class": cls, "confidence": round(conf, 4)})
+        predictions.append({"class": cls, "confidence": round(float(conf), 4)})
 
     return predictions
 
