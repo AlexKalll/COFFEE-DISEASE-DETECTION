@@ -1,0 +1,9 @@
+train: dataset/Train
+val: dataset/valid
+test: dataset/test
+
+names:
+  0: Healthy
+  1: Rust
+  2: Phoma
+  3: Miner
