@@ -48,3 +48,5 @@ Thumbs.db
 *.tmp
 *.cache
 *.temp
+*.md
+*.pt
