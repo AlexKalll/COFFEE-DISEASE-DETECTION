@@ -5,11 +5,12 @@ import torch
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 DATASET_DIR = BASE_DIR / "dataset"
+TEST_DIR = DATASET_DIR / "test"
 
 MODEL_NAME = "yolo11n-cls"
 PRETRAINED_MODEL = BASE_DIR / f"{MODEL_NAME}.pt"
 
-MODELS_DIR = BASE_DIR / "models-1"
+MODELS_DIR = BASE_DIR / "models"  
 MODEL_PATH = MODELS_DIR / "best.pt"
 LAST_MODEL_PATH = MODELS_DIR / "last.pt"
 
