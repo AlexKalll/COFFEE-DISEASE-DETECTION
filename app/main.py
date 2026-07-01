@@ -29,9 +29,10 @@ def predict_image(image, top_k=3):
     result = results[0]
 
     probs = result.probs
-    indices = probs.topk(top_k)
-    classes = [result.names[i] for i in indices[1]]
-    confidences = indices[0].cpu().numpy().tolist()
+    top_indices = probs.top5[:top_k]
+    top_confidences = probs.top5conf[:top_k].cpu().numpy().tolist()
+    classes = [result.names[i] for i in top_indices]
+    confidences = top_confidences
 
     output = {}
     for cls, conf in zip(classes, confidences):
