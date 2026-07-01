@@ -1,6 +1,7 @@
-train: dataset/Train
-val: dataset/valid
-test: dataset/test
+path: dataset
+train: train
+val: valid
+test: test
 
 names:
   0: Healthy
