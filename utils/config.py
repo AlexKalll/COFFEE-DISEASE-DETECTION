@@ -4,23 +4,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 DATASET_DIR = BASE_DIR / "dataset"
 
-TRAIN_DIR = DATASET_DIR / "Train"
+TRAIN_DIR = DATASET_DIR / "train"
 VAL_DIR = DATASET_DIR / "valid"
 TEST_DIR = DATASET_DIR / "test"
 
 MODEL_NAME = "yolo11n-cls"
-MODEL_PATH = BASE_DIR / "models" / "train" / "best.pt"
-LAST_MODEL_PATH = BASE_DIR / "models" / "train" / "last.pt"
-PRETRAINED_MODEL = BASE_DIR / "yolo11n-cls.pt"
+PRETRAINED_MODEL = BASE_DIR / f"{MODEL_NAME}.pt"
+
+MODELS_DIR = BASE_DIR / "models"
+MODEL_PATH = MODELS_DIR / "best.pt"
+LAST_MODEL_PATH = MODELS_DIR / "last.pt"
+
+RUNS_DIR = MODELS_DIR / "runs"
+RUN_NAME = "train"
 
 CLASSES = ["Healthy", "Rust", "Phoma", "Miner"]
 NUM_CLASSES = len(CLASSES)
 
 IMG_SIZE = 224
-EPOCHS = 30
+EPOCHS = 1
 BATCH_SIZE = 16
-
-PROJECT_NAME = "models/runs"
-RUN_NAME = "train"
 
 DATA_YAML = BASE_DIR / "data.yaml"
