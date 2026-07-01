@@ -4,10 +4,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 DATASET_DIR = BASE_DIR / "dataset"
 
-TRAIN_DIR = DATASET_DIR / "train"
-VAL_DIR = DATASET_DIR / "valid"
-TEST_DIR = DATASET_DIR / "test"
-
 MODEL_NAME = "yolo11n-cls"
 PRETRAINED_MODEL = BASE_DIR / f"{MODEL_NAME}.pt"
 
