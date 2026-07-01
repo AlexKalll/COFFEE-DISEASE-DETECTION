@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from utils.config import MODEL_PATH, CLASSES
+from utils.config import MODEL_PATH, CLASSES, DEVICE
 from ultralytics import YOLO
 
 model = None
@@ -28,6 +28,7 @@ def load_model():
         if not Path(MODEL_PATH).exists():
             raise FileNotFoundError(f"Model not found at {MODEL_PATH}. Run train.py first.")
         model = YOLO(str(MODEL_PATH))
+        print(f"Model loaded on device: {DEVICE}")
     return model
 
 
@@ -36,7 +37,7 @@ def predict_image(image, top_k=3):
         return "<div class='top1' style='--c:#888'><p class='cls'>No image</p></div>", {}
     clf = load_model()
     t0 = time.perf_counter()
-    results = clf.predict(source=image, verbose=False)
+    results = clf.predict(source=image, device=DEVICE, verbose=False)
     ms = (time.perf_counter() - t0) * 1000
     probs = results[0].probs
     idxs = probs.top5[:top_k]
@@ -62,7 +63,7 @@ def main():
             with gr.Column():
                 top1_out = gr.HTML(value="<div class='top1' style='--c:#888'><p class='cls' style='color:#888'>Awaiting input</p></div>")
                 output = gr.Label(label="Upload or take a photo of coffee leaf and click the 'Predict' button", num_top_classes=4)
-        gr.Markdown("<div class='footer'>Note: AI predictions may not be accurate.</div>")
+        gr.Markdown(f"<div class='footer'>Note: AI predictions may not be accurate. · Device: <b>{DEVICE}</b></div>")
         predict_btn.click(fn=predict_image, inputs=[image_input, top_k_slider], outputs=[top1_out, output], show_progress="full")
         clear_btn.click(fn=lambda: (None, "<div class='top1' style='--c:#888'><p class='cls' style='color:#888'>Awaiting input</p></div>", {}), inputs=[], outputs=[image_input, top1_out, output])
     demo.launch(theme=gr.themes.Soft(primary_hue="green"), css=CUSTOM_CSS)

@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import torch
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 DATASET_DIR = BASE_DIR / "dataset"
@@ -20,5 +22,7 @@ NUM_CLASSES = len(CLASSES)
 IMG_SIZE = 224
 EPOCHS = 1
 BATCH_SIZE = 16
+
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 DATA_YAML = BASE_DIR / "data.yaml"

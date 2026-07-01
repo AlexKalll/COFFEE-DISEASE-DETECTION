@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from utils.config import MODEL_PATH, CLASSES
+from utils.config import MODEL_PATH, CLASSES, DEVICE
 
 
 def predict(image_path, top_k=3):
@@ -14,7 +14,7 @@ def predict(image_path, top_k=3):
 
     model = YOLO(str(MODEL_PATH))
 
-    results = model.predict(source=image_path, verbose=False)
+    results = model.predict(source=image_path, device=DEVICE, verbose=False)
 
     if not results:
         print("No predictions returned.")
