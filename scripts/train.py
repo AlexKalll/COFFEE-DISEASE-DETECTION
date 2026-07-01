@@ -7,7 +7,7 @@ import shutil
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 from utils.config import (
     PRETRAINED_MODEL,
-    TRAIN_DIR,
+    DATASET_DIR,
     IMG_SIZE,
     EPOCHS,
     BATCH_SIZE,
@@ -24,7 +24,7 @@ def train():
     model = YOLO(PRETRAINED_MODEL)
 
     results = model.train(
-        data=str(TRAIN_DIR),
+        data=str(DATASET_DIR),
         epochs=EPOCHS,
         imgsz=IMG_SIZE,
         batch=BATCH_SIZE,
